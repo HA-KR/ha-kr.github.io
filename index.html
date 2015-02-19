@@ -1,0 +1,321 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>PDP JSON Layouting</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <style>
+      body {
+        min-width: 200px;
+        max-width: 790px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+    </style>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59926264-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <article class="markdown-body"><h2 id="pdp-json-layouting">PDP JSON Layouting</h2>
+<h3 id="basic-structure-of-json-layout">Basic Structure of JSON Layout</h3>
+<p>We&#39;ll refer the following structure as a node. A node is an equivalent of HTML Node (e.g, <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code> ..)</p>
+<pre class="hljs"><code>{
+  "<span class="hljs-attribute">type</span>"  : <span class="hljs-value"><span class="hljs-string">"..."</span></span>,
+  "<span class="hljs-attribute">value</span>" : <span class="hljs-value"><span class="hljs-string">"..."</span></span>,
+  "<span class="hljs-attribute">attr</span>"  : <span class="hljs-value">{}</span>,
+  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+     {}
+   ]
+</span>}</code></pre><p><code>type</code>, <code>value</code>, <code>attr</code>, <code>children</code>.. are node attributes, where,</p>
+<blockquote>
+<ul class="list">
+<li><em><code>type</code></em> - type of node, which can be one of [type]</li>
+<li><em><code>value</code></em> - value of node, which can be one of [value]</li>
+<li><em><code>attr</code></em> - the list of attributes for current node</li>
+<li><em><code>children</code></em> - list of nodes to be wrapped inside current node</li>
+</ul>
+</blockquote>
+<p>Apart from the above attributes, node type column has special attributes,</p>
+<blockquote>
+<ul class="list">
+<li><em><code>width</code></em> - in case of <em>type</em> as column use width to specify the column width e.g, <code>12</code>, <code>{&quot;small&quot;: 6, &quot;medium&quot;: 12}</code></li>
+<li><em><code>visible</code></em> - visibility options for column e.g, <code>[&quot;large&quot;, &quot;medium&quot;]</code></li>
+<li><em><code>variations</code></em> -     used to specify <code>push</code>, <code>pull</code>, <code>offset</code> width e.g, <code>{&quot;offset&quot;: 2}</code>, <code>{&quot;push&quot;: 3}</code></li>
+</ul>
+<p><strong>NOTE</strong></p>
+<ul class="list">
+<li>In JSON format <code>,</code> will not be there for last attribute, the rest of the lines will end with a <code>,</code></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="analogy-between-json-node-and-html-node">Analogy between JSON Node and HTML node</h3>
+<p>Consider the following simpe HTML markup</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">div</span> <span class="hljs-property">id</span>=<span class="hljs-string">"title"</span> data-catalog-sku=<span class="hljs-string">"SM-S3-NEO-I9300"</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre><p>Lets see the JSON equivalent of following:</p>
+<ol class="list">
+<li>Create a JSON with type as <em>html_tag</em> and value as <em>div</em><pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+"<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span>
+</span>}</code></pre></li>
+<li><p>Lets add attribute to the node, HTML attributes of a tag can be specified in <em>attr</em> attribute of the node</p>
+<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+"<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+"<span class="hljs-attribute">attr</span>" : <span class="hljs-value">{
+ "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"title"</span></span>,
+ "<span class="hljs-attribute">data-catalog-sku</span>":<span class="hljs-value"><span class="hljs-string">"SM-S3-NEO-I9300"</span>
+</span>}
+</span>}</code></pre><p>In the above example to get a <code>&lt;span&gt;</code> instead of <code>&lt;div&gt;</code> we just need to replace <code>&quot;value&quot;: &quot;div&quot;</code> with  <code>&quot;value&quot;: &quot;span&quot;</code>, similarly for any html tag.
+Consider a complex html markup,</p>
+<pre class="hljs"><code>&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">" row"</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"col-md-5 col-sm-5"</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"col-md-7 col-sm-7"</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre><p>Lets create the JSON equivalent of the above HTML,</p>
+</li>
+<li><p>The below node makes up for a row</p>
+<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span>
+</span>}</code></pre></li>
+<li>The below node makes up for a 5 column<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+"<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">5</span>
+</span>}</code></pre></li>
+<li>The below node makes up for a 7 column<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+"<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">7</span>
+</span>}</code></pre></li>
+<li>All we have to do is to make 5-column and 7-column node as a children of row. The final JSON will look like<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+"<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+ {
+   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+   "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">5</span>
+ </span>},
+ {
+   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+   "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">7</span>
+ </span>}
+]
+</span>}</code></pre></li>
+<li>What if we needed to add classes for breakpoint like below<pre class="hljs"><code>&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">" row"</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"col-md-5 col-sm-6 col-xs-6"</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;<span class="hljs-keyword">div</span> <span class="hljs-type">class</span>=<span class="hljs-string">"col-md-7 col-sm-6 col-xs-6"</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;</code></pre>Simple, pass breakpoint widths to width as,<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+"<span class="hljs-attribute">width</span>": <span class="hljs-value">{
+ "<span class="hljs-attribute">large</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>,
+ "<span class="hljs-attribute">medium</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+ "<span class="hljs-attribute">small</span>" : <span class="hljs-value"><span class="hljs-number">6</span>
+</span>}
+</span>}</code></pre>The equivalent JSON with column breakpoint widths is,<pre class="hljs"><code>{
+"<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+"<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+ {
+   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+   "<span class="hljs-attribute">width</span>": <span class="hljs-value">{
+     "<span class="hljs-attribute">large</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>,
+     "<span class="hljs-attribute">medium</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+     "<span class="hljs-attribute">small</span>" : <span class="hljs-value"><span class="hljs-number">6</span>
+   </span>}
+ </span>},
+ {
+   "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+   "<span class="hljs-attribute">width</span>": <span class="hljs-value">{
+     "<span class="hljs-attribute">large</span>" : <span class="hljs-value"><span class="hljs-number">7</span></span>,
+     "<span class="hljs-attribute">medium</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+     "<span class="hljs-attribute">small</span>" : <span class="hljs-value"><span class="hljs-number">6</span>
+   </span>}
+ </span>}
+]
+</span>}</code></pre><blockquote>
+<p><strong>NOTE</strong></p>
+<ul class="list">
+<li>The type of children is always Array <code>[]</code></li>
+<li>In JSON layout,</li>
+<li><ul class="list">
+<li><code>large</code> corresponds to <code>md</code></li>
+</ul>
+</li>
+<li><ul class="list">
+<li><code>medium</code> corresponds to <code>sm</code></li>
+</ul>
+</li>
+<li><ul class="list">
+<li><code>small</code> corresponds to <code>xs</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h3 id="basic-structure-of-pdp">Basic Structure of PDP</h3>
+<pre class="hljs"><code>{
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"root"</span></span>,
+  "<span class="hljs-attribute">value</span>":<span class="hljs-value"><span class="hljs-string">"pdp"</span></span>,
+  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+    {}
+   ]
+</span>}</code></pre><hr>
+<h3 id="a-demo-pdp">A Demo PDP</h3>
+<pre class="hljs"><code>{
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"root"</span></span>,
+  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"pdp"</span></span>,
+  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+      "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+        {
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">large</span>": <span class="hljs-value"><span class="hljs-number">6</span></span>,
+            "<span class="hljs-attribute">small</span>": <span class="hljs-value"><span class="hljs-number">12</span></span>,
+            "<span class="hljs-attribute">medium</span>": <span class="hljs-value"><span class="hljs-number">6</span>
+          </span>}</span>,
+          "<span class="hljs-attribute">visible</span>": <span class="hljs-value">[<span class="hljs-string">"large"</span>]</span>,
+          "<span class="hljs-attribute">variations</span>": <span class="hljs-value">{"<span class="hljs-attribute">push</span>": <span class="hljs-value"><span class="hljs-number">3</span></span>}</span>,
+          "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+            {
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+              "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"pdp_breadcrumbs"</span>
+            </span>}
+          ]
+        </span>}
+      ]
+    </span>},
+    {
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+      "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+          "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+            {
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+              "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                {
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">10</span></span>,
+                  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"medium_image"</span>
+                    </span>}
+                  ]
+                </span>},
+                {
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+                  "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"catalog_images_thumb_nails"</span>
+                    </span>}
+                  ]
+                </span>}
+              ]
+            </span>}
+          ]
+        </span>},
+        {
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">7</span>
+        </span>}
+      ]
+    </span>},
+    {
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+      "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">8</span>
+        </span>},
+        {
+          "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"column"</span></span>,
+          "<span class="hljs-attribute">width</span>": <span class="hljs-value"><span class="hljs-number">4</span>
+        </span>}
+      ]
+    </span>}
+  ]
+</span>}</code></pre><hr>
+<h3 id="list-of-availabe-blocks">List of Availabe Blocks</h3>
+<ul class="list">
+<li>add_to_cart</li>
+<li>add_to_compare</li>
+<li>add_to_wishlist</li>
+<li>also_available_in</li>
+<li>availability_time</li>
+<li>badges</li>
+<li>brand_page_link</li>
+<li>bullet_delivery</li>
+<li>buy_with_plan</li>
+<li>catalog_images</li>
+<li>catalog_images_thumb_nails</li>
+<li>catalog_options</li>
+<li>catalog_title</li>
+<li>check_servicable_area</li>
+<li>cod_charges</li>
+<li>cod_zone_desc</li>
+<li>compare_bar</li>
+<li>description</li>
+<li>disclaimer</li>
+<li>discount_gola</li>
+<li>discussions</li>
+<li>dynamic_badges</li>
+<li>dynamic_bundle</li>
+<li>exchange_policy</li>
+<li>fb_comment_in_sdp</li>
+<li>feature_groups</li>
+<li>features</li>
+<li>flixmedia_plugin</li>
+<li>free_delivery</li>
+<li>iamavailable</li>
+<li>in_stock</li>
+<li>items_by_category</li>
+<li>key_features</li>
+<li>list_price</li>
+<li>medium_image</li>
+<li>nearest_store_finder</li>
+<li>offer_description</li>
+<li>offer_items</li>
+<li>other_offerings</li>
+<li>pdp_banner</li>
+<li>pdp_breadcrumbs</li>
+<li>price_drop_alert</li>
+<li>pricing_summary</li>
+<li>product_bundle_banner</li>
+<li>promotions</li>
+<li>qview_next</li>
+<li>qview_prev</li>
+<li>rating_and_review</li>
+<li>related_items</li>
+<li>related_tags</li>
+<li>reviews</li>
+<li>shipping_details</li>
+<li>shipping_policy</li>
+<li>snippet</li>
+<li>social_buttons</li>
+<li>social_share</li>
+<li>static_bundle</li>
+<li>t_and_c</li>
+<li>variant_link</li>
+<li>warranty</li>
+<li>xsell</li>
+</ul>
+    </article>
+  </body>
+</html>
