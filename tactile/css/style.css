@@ -56,3 +56,26 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i, header 
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+
+/**slick styling */
+.slick-slider .slick-dots li {
+    height: auto;
+    width: auto
+}
+
+.slick-slider .slick-dots li.slick-active button {
+    background: #000!important
+}
+
+.slick-slider .slick-dots li button {
+    width: 14px!important;
+    height: 14px!important;
+    background: #999!important;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%
+}
+.slideshow img{
+  max-width:100%;
+}
