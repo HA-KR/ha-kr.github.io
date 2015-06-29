@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+<title>Tactile</title>
+
+<!-- CSS  -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<header class="grey darken-3">
+  <nav class='top-nav' role="navigation">
+    <div class='nav-wrapper white'>
+      <a href="#" data-activates="nav-mobile" class="button-collapse black-text hide-on-large-only"><i class="material-icons">menu</i></a>
+      <a href="#" class="brand-logo black-text  hide-on-med-and-down">Tactile Pvt Ltd</a>
+      <ul class="right">
+        <li>
+        <a class="modal-trigger waves-effect waves-light black-text" href="#modal1"> <i class="material-icons left">email</i>Email </a>
+        </li>
+        <li>
+        <a class="modal-trigger waves-effect waves-light black-text"  href="#modal1"> <i class="material-icons left">textsms</i>SMS </a>
+        </li>
+      </ul>
+    </div>
+    <ul id="nav-mobile" class="side-nav fixed grey darken-3 ">
+      <li id='logo-container' class='grey darken-2'><a href="#" class="brand-logo white-text">Logo </a></li>
+        <li>
+        <form action='#!'>
+          <div class="input-field">
+            <input id="search" type="search" placeholder='search' required='required'>
+            <label for="search"><i class="material-icons left">search</i></label>
+          </div>
+        </form>
+        </li>
+      <li><a class="waves-effect white-text" href="#">Home</a></li>
+      <li><a class="waves-effect white-text" href="#">Our Products</a></li>
+      <li><a class="waves-effect white-text" href="#">About Us</a></li>
+      <li><a class="waves-effect white-text" href="#">Contact Us</a></li>
+      <li><a class="waves-effect white-text" href="#">Gallery</a></li>
+      <li>
+
+      <ul class="collapsible white-text" data-collapsible="accordion">
+        <li>
+        <div class="collapsible-header"><i class="material-icons right">place</i>Posts</div>
+        <div class="collapsible-body black-text"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+        <li>
+        <div class="collapsible-header"><i class="material-icons right">whatshot</i>Tweets</div>
+        <div class="collapsible-body black-text"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+      </ul>
+
+      </li>
+      <!--<li class="divider"></li>-->
+    </ul>
+  </nav>
+</header>
+<main>
+<div id="content" class='row'>
+  <div class='col s12 m12 l12'>
+    <div class="section no-pad-bot" id="index-banner">
+      <h2 class="header center orange-text">Welcome to Tactile Pvt Ltd</h2>
+      <div class="row center">
+        <p class="header col s12">
+        Tactile found in 2015,our array of industrial process equipment comprises of plate heat exchangers, plate heat exchangers gasket, ss electro polished pipes fittings, triclover fittings, and valves, double mechanical seals, shaft seals, and disc spring. Each of our products is recognized for its performance, high efficiency and durability. Our state-of-the-art manufacturing facilities have helped us in producing a diverse range of products that have received wide recognition from our esteemed customers. tactile Enmech Pvt Ltd also offer customized solutions related to processing equipment that facilitates us to mold our products as per the client's specifications. Our untiring efforts and ethical business dealings have helped us to reach our client's with the best possible products and have enabled us to expand our business further.
+        </p>
+      </div>
+      <div class="row center">
+        <!-- Modal Trigger -->
+        <a class="modal-trigger waves-effect waves-light btn orange" href="#modal1">Get Started</a>
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>Contact Us</h4>
+            <p>Fill in your details</p>
+            <div class="fr_p w30_p m40_p ft5_p">
+              <div class="ft10_p ln2_p">Business Enquiry Form</div>
+              <div class="ln1_p"></div>
+              <form action="/cgi/autotdw_sms.php" method="POST" name="dataform" onsubmit="return checkdatafetch(this)" enctype="multipart/form-data">
+                <input type="HIDDEN" name="S_referer" id="refer_detail" value="">
+                <input type="hidden" name="S_reference_text" id="reference_text_detail" value="#enquiryform">
+                <input type="HIDDEN" name="S_current_url" id="current_refer_detail" value="http://www.genesisengineering.net/enquiry.html">
+                <input type="HIDDEN" name="required" value="Description,S_country,S_mobile"><input type="HIDDEN" name="Item Required" value="" id="cart_details"><input type="hidden" name="sort" value="order:Description,Item Required">	<input type="hidden" name="redirect" value="http://www.genesisengineering.net/thankyou.html">
+                <input type="HIDDEN" name="modid" value="TDW">
+                <input type="hidden" name="modref_id" value="2440438277">
+                <input type="hidden" name="modref_type" value="1">
+                <input type="HIDDEN" name="gluser_id" value="242365">
+                <input type="HIDDEN" name="S_glusr_id" value="">
+                <input type="hidden" name="return_url" value="http://www.genesisengineering.net/enquiry.html">
+                <div style="position:relative;" id="txt_cont"><div onclick="this.style.display='none'; document.dataform.Description.focus();" class="c11_p txt_cont lh_d52" id="text_placeholder" style="display: block;">Describe Your Requirement in Details Like: <br>  -  Products You Are Looking For <br>   -  Features / Specifications <br>-  Application / Usage <br> -  Minimum Order Quantity, etc,<br>   &nbsp; to get Best QUOTES.</div><textarea class="clr7_p bdr2_p bg10_p h1_p w30_p fnt_p icon1_p icon_datauri icon2_p validate Desc_err active_error_enq" id="Description_field" name="Description" value="" onblur="check_Description_enq();" onfocus="document.getElementById('text_placeholder').style.display='none'" tabindex="16"></textarea></div><span id="d1_enq" class="error_notification_enq" style="display: block;">Kindly Describe Your Requirement.</span>
+                <div id="formhide">
+                  <input type="text" class="bdr2_p bg10_p m41_p hi2_p icon3_p icon_datauri icon4_p validate req email_val c11_p active_error_enq" name="S_email" id="S_email_enq" value="Enter your email:" onblur="check_Email_enq();" onkeydown="check_Email_focus_enq(this,event);" onclick="check_Email_focus_enq(this);" tabindex="17">
+
+                  <span id="e1_enq" class="error_notification_enq" style="display: block;">Please enter your email.</span>
+                  <div id="form_open_enq" style="display:none">
+                    <select name="S_salute" style="display:none" id="S_salute">
+                      <option value="Mr." selected="SELECTED">Mr. </option>
+                      <option value="Ms.">Ms. </option>
+                      <option value="Mrs.">Mrs. </option>
+                      <option value="Dr.">Dr. </option></select>
+                    <input type="text" class="bdr2_p bg10_p m41_p hi2_p icon3_p icon_datauri icon5_p validate chars c11_p" name="fullname" id="fullname_enq" value="Enter your name:" onblur="check_Fullname_enq();" onclick="check_Fullname_focus_enq(this);" onkeydown="check_Fullname_focus_enq(this,event);" tabindex="18">
+                    <span id="f1_enq" class="error_notification_enq" style="display:none"></span>
+
+                    <input id="firstname" name="S_name" type="hidden" value="">
+                    <input id="lastname" name="S_lname" type="hidden" value="">
+                    <input name="S_organization" type="hidden" value="" id="S_organization">
+                    <input type="hidden" name="S_cmobile" id="S_cmobile" value="+91">
+                    <input name="S_mobile1" type="hidden" value="Mobile Number">
+                    <input name="S_phone_country_code" type="hidden" value="+91">
+
+                    <div id="country_drop_list">
+                      <input type="text" class="bdr2_p bg10_p m41_p hi2_p icon3_p icon_datauri icon7_p validate req ui-autocomplete-input" autocomplete="off" id="S_country_enq" name="S_country" value="India" onblur="check_Country_enq();" onfocus="check_S_country1_focus_enq(this);" tabindex="19" placeholder="Country" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+                      <span id="c1_enq" class="error_notification_enq" style="display:none"></span>
+                    </div>
+                    <input type="text" class="bdr2_p bg10_p m41_p hi2_p icon3_p icon_datauri icon6_p validate req mobile_val c11_p" name="S_mobile" id="S_mobile_enq" value="Enter your mobile:" maxlength="12" onblur="check_Mobile_enq();" onclick="check_Mobile_focus_enq(this);" onkeydown="check_Mobile_focus_enq(this);" tabindex="20">
+                    <span id="m1_enq" class="error_notification_enq" style="display:none"></span>
+                    <input type="Hidden" name="country" value="IN" id="txtCountry_enq">
+                    <input type="Hidden" name="country_iso" id="country_iso" value="IN">
+                    <br>
+                  </div>
+                </div>
+                <div class="txc_p m41_p "><span class="arw1_p cu_p submit_form">&nbsp;</span><input type="submit" name="" value="Send  E-mail " onclick="_gaq.push(['b._trackEvent','Body','SendEnquiry/EnquiryPage','d0005']);" class=" btny_p cu_p btn_p cu_p" id="SubmitEnq_enq" tabindex="21">
+                </div>
+              </form>
+              <div id="mdccookie_details" style="display:none;" class="m47_p fnt_p fntcr_p m31_p lh3_p">
+                <b class="mr2_p ft1_p">Your Contact Information:</b><span class="clr8_p fr_p mr2_p"><a onclick="clear_mdccookie('enquiry')">(not me)</a></span>
+                <div class="bg8_p">&nbsp;</div>
+                <div id="mdccookieform" class="ft2_p ml_p"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect green-text waves-green btn-flat ">Submit</a>
+            <a href="#!" class="modal-action modal-close waves-effect red-text  waves-red btn-flat ">Cancel</a>
+          </div>
+        </div>
+      </div>
+      <br><br>
+
+    </div>
+    <div class="section">
+      <div class='row'>
+        <div class='col s6'>
+          <div class="card small">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/office.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">
+                Who we are<i class="material-icons right">more_vert</i>
+              </span>
+              <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis ...
+              </p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Who we are<i class="material-icons right">close</i></span>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies</p>
+            </div>
+          </div>
+        </div>
+        <div class='col s6'>
+          <div class="card  small">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/office.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">
+                What we do<i class="material-icons right">more_vert</i>
+              </span>
+              <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis ...
+              </p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">What we do<i class="material-icons right">close</i></span>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="section">
+      <div class='row'>
+        <div class='col s6'>
+          <div class="card small">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/office.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">
+                Who we are<i class="material-icons right">more_vert</i>
+              </span>
+              <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis ...
+              </p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Who we are<i class="material-icons right">close</i></span>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies</p>
+            </div>
+          </div>
+        </div>
+        <div class='col s6'>
+          <div class="card  small">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/office.jpg">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">
+                What we do<i class="material-icons right">more_vert</i>
+              </span>
+              <p>
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis ...
+              </p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">What we do<i class="material-icons right">close</i></span>
+              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section">
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Our Services</h5>
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">About Site</h5>
+
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+
+          <div class="card lighten-1 z-depth-1">
+            <div class="card-content">
+              <div class="card-title black-text">
+                <div class="icon-block">
+                  <h2 class="center light-blue-text"><i class="material-icons">contact_phone</i></h2>
+                  Contact Us
+                </div>
+              </div>
+              <p class="light">
+              Genesis Enmech Pvt Ltd<br>
+              T. M. Sudhakar <br>
+              New No. 27, Old No. 11 A/B, Soundarajan Street, Off. Venkatnarayana Road, T. Nagar,<br>
+              Chennai - 600017,<br>
+              Tamil Nadu, India<br>
+              </p>
+            </div>
+            <div class="card-action">
+              <a class="modal-trigger waves-effect red waves-light btn btn-floating" href="#modal1">
+                <i class="material-icons left">email</i>email
+              </a>
+              <a class="modal-trigger waves-effect green waves-light btn btn-floating"  href="#modal1">
+                <i class="material-icons left">textsms</i>sms
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer white">
+      <div class="footer-copyright valign-wrapper">
+        <div class="container valign">
+          <p class="black-text text-lighten-4"> © TACTILE CENTER PVT LTD. All Rights Reserved (Terms of Use) </p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+</main>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+
+</body>
+</html>

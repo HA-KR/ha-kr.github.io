@@ -1,0 +1,58 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+header, header .side-nav li, header .side-nav li > a{
+  padding: 0;
+}
+header .side-nav .collapsible-header{
+  margin: 0;
+}
+header nav{
+  background-color: #424242;
+  color: black;
+  /*box-shadow: none;*/
+}
+header .side-nav li:hover, header .side-nav li.active {
+  background-color: #616161;
+}
+header, main{
+  padding-left: 200px;
+}
+@media only screen and (max-width: 992px){
+header, main {
+  padding-left: 0;
+}
+}
+#logo-container{
+  height: 56px;
+}
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i, header .side-nav a, header .side-nav .material-icons{
+  height: 56px;
+  line-height: 56px;
+}
+/*#hd nav .divider{*/
+  /*border-left: 20px solid transparent;*/
+  /*border-right: 20px solid transparent;*/
+  /*border-top: 20px solid #f00;*/
+/*}*/
+/*@media only screen and (min-width: 601px){*/
+  /*#hd .brand-logo {*/
+    /*position: relative;*/
+    /*left: 50%;*/
+    /*-webkit-transform: translateX(-50%);*/
+    /*-moz-transform: translateX(-50%);*/
+    /*-ms-transform: translateX(-50%);*/
+    /*-o-transform: translateX(-50%);*/
+    /*transform: translateX(-50%);*/
+  /*}*/
+/*}*/
+/*#hd nav ul > li, #hd nav ul > li > a{*/
+  /*width: 100%;*/
+/*}*/
+.icon-block .material-icons {
+	font-size: inherit;
+}
