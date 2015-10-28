@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Search JSON Layouting</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <style>
+      body {
+        min-width: 200px;
+        max-width: 790px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+    </style>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59926264-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+  <body>
+    <article class="markdown-body">
+<h3 id="search-json-layouting">Search JSON layouting</h3>
+
+<h4 id="1-basics">1. Basics</h4>
+
+<p>Please read <a href="http://ha-kr.github.io/">PDP JSON Layouting</a> before reading this.</p>
+
+<p>In addition to the above one more feature is added with which we can add markup to slots. It can be used in the case of search to put blocks in different slots.</p>
+
+<p>A search page has three usable slots</p>
+
+<blockquote>
+  <ul>
+  <li>left_sidebar</li>
+  <li>top</li>
+  <li>upper_content</li>
+  </ul>
+</blockquote>
+
+<p>as search page js will fetch results through AJAX calls and replaces the content slot; <strong><em>facet</em></strong> block can only used inside these slots. This can be achieved by following syntax.</p>
+
+<pre class="prettyprint"><code class="language-json hljs ">{ 
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value">'root'</span>,
+  "<span class="hljs-attribute">slots</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">upper_content</span>": <span class="hljs-value">[
+      {
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+        "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"facets"</span>
+      </span>}
+    ]
+  </span>}</span>,
+  "<span class="hljs-attribute">children</span>" : <span class="hljs-value">'...'
+</span>}</code></pre>
+
+<p>So, now <strong>root node</strong> accepts one more attribute with name <strong>slots</strong> which is hash with <em>layout_name</em> and <em>array_of_nodes_to_render</em> as its key value pair.</p>
+
+
+
+<h4 id="2-blocks-for-search">2. Blocks for search</h4>
+
+<p>Search Layouting works in the same way as of PDP but with the following blocks </p>
+
+<blockquote>
+  <ul>
+  <li>advanced_filters</li>
+  <li>bn_desc</li>
+  <li>bn_display_name</li>
+  <li>bn_message</li>
+  <li>compare</li>
+  <li>infinite_scroll</li>
+  <li>marketplace_desc</li>
+  <li>marketplace_reviews</li>
+  <li>no_search_results</li>
+  <li>pagination</li>
+  <li>results_per_page</li>
+  <li>reviews</li>
+  <li>search_fields_suggest</li>
+  <li>search_result_items</li>
+  <li>search_views</li>
+  <li>sort_by</li>
+  <li>facets</li>
+  </ul>
+</blockquote>
+
+<h4 id="3-sample-search-layout">3. Sample Search Layout</h4>
+
+<p>As in this example please make sure facets are in one of the slots. This demo puts facets in <strong><em>uppper_content</em></strong> slot. which can be styled to have horizontal facets.</p>
+
+<pre class="prettyprint"><code class="language-json hljs ">{
+  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"root"</span></span>,
+  "<span class="hljs-attribute">slots</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">upper_content</span>": <span class="hljs-value">[
+      {
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+        "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"facets"</span>
+      </span>}
+    ]
+  </span>}</span>,
+  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"infinite_scroll"</span></span>,
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"reviews"</span></span>,
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"marketplace_desc"</span></span>,
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">if</span>": <span class="hljs-value">[
+        <span class="hljs-string">"has_block_search_result_items?"</span>
+      ]</span>,
+      "<span class="hljs-attribute">then</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+        "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+        "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"bn_display_name"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"bn_desc"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+            "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"search_fields_suggest"</span>
+              </span>}
+            ]</span>,
+            "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">class</span>": <span class="hljs-value"><span class="hljs-string">"clearfix"</span>
+            </span>}
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"advanced_filters"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">else</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+              "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+              "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+                  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"bn_message"</span>
+                    </span>},
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"search_views"</span>
+                    </span>}
+                  ]</span>,
+                  "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+                    "<span class="hljs-attribute">class</span>": <span class="hljs-value"><span class="hljs-string">"summary-message"</span>
+                  </span>}
+                </span>},
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"pagination"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+                </span>},
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"sort_by"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+                </span>},
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"results_per_page"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+                </span>}
+              ]</span>,
+              "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">class</span>": <span class="hljs-value"><span class="hljs-string">"search-summary clearfix"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">if</span>": <span class="hljs-value">[
+              <span class="hljs-string">"has_block_no_search_results?"</span>
+            ]</span>,
+            "<span class="hljs-attribute">then</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+              "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"no_search_results"</span>
+            </span>}
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"compare"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"search_result_items"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"&lt;div class='clearfix'&gt;&lt;/div&gt;"</span></span>,
+            "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html"</span>
+          </span>},
+          {
+            "<span class="hljs-attribute">else</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+              "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+              "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"div"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"html_tag"</span></span>,
+                  "<span class="hljs-attribute">children</span>": <span class="hljs-value">[
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"bn_message"</span>
+                    </span>},
+                    {
+                      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span></span>,
+                      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"search_views"</span>
+                    </span>}
+                  ]</span>,
+                  "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+                    "<span class="hljs-attribute">class</span>": <span class="hljs-value"><span class="hljs-string">"summary-message message-last"</span>
+                  </span>}
+                </span>},
+                {
+                  "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"pagination"</span></span>,
+                  "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+                </span>}
+              ]</span>,
+              "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">class</span>": <span class="hljs-value"><span class="hljs-string">"search-summary summary-response-last"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">if</span>": <span class="hljs-value"><span class="hljs-string">"has_block_no_search_results?"</span>
+          </span>}
+        ]</span>,
+        "<span class="hljs-attribute">attr</span>": <span class="hljs-value">{
+          "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"search-results"</span>
+        </span>}
+      </span>}
+    </span>},
+    {
+      "<span class="hljs-attribute">value</span>": <span class="hljs-value"><span class="hljs-string">"marketplace_reviews"</span></span>,
+      "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"block"</span>
+    </span>}
+  ]
+</span>}</code></pre>
+    </article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'andersonvom'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </body>
+</html>
