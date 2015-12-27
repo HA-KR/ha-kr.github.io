@@ -10,5 +10,20 @@
     });
     $('.button-collapse').sideNav({menuWidth: 200});
     $('.modal-trigger').leanModal();
+    $('input.use-sms')
+    .change(function(){
+      if($(this).is(':checked')){
+        $('.email.mutually-exclusive').hide();
+        $('.sms.mutually-exclusive').show();
+      }
+      else{
+        $('.sms.mutually-exclusive').hide();
+        $('.email.mutually-exclusive').show();
+      }
+    })
+    .trigger('change');
+    $('.contact.by').click(function(){
+      $('input.use-sms').prop('checked', $(this).hasClass('sms')).trigger('change');
+    });
   }); // end of document ready
 })(jQuery); // end of jQuery name space
