@@ -79,3 +79,21 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i, header 
 .slideshow img{
   max-width:100%;
 }
+.brand-logo{
+  text-transform: uppercase;
+}
+.action-label{
+  padding: 0 15px 0 0;
+}
+
+.button-collapse{
+    margin-right: 180px;
+  }
+.summary-txt{
+  text-align: justify;
+}
+.summary-txt:before{
+  content: " ";
+  width: 1em;
+  display: inline-block;
+}

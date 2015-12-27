@@ -1,7 +1,6 @@
 (function($){
   $(function(){
     $('.slideshow').slick({
-      dots: true,
       infinite: true,
       speed: 300,
       autoplaySpeed: 1000,
