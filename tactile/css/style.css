@@ -34,6 +34,12 @@ nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i, header 
   height: 56px;
   line-height: 56px;
 }
+@media only screen and (max-width: 992px){
+  header nav .brand-logo {
+    left: 40%;
+    font-size: 1.4em ;
+  }
+}
 /*#hd nav .divider{*/
   /*border-left: 20px solid transparent;*/
   /*border-right: 20px solid transparent;*/

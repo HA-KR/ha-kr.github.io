@@ -3,7 +3,7 @@
     $('.slideshow').slick({
       infinite: true,
       speed: 300,
-      autoplaySpeed: 1000,
+      autoplaySpeed: 2000,
       slidesToShow: 1,
       autoplay: true,
       lazyLoad: 'ondemand'
