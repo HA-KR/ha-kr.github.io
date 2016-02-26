@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>Add to cart popup customization</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <style>
+      body {
+        min-width: 200px;
+        max-width: 790px;
+        margin: 0 auto;
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="markdown-body"><h1 id="add-to-cart-popup-customization">Add to cart popup customization</h1>
+<p><sub>making add to cart as flyout from right similar to <a href="http://jumbo.ae">Jumbo</a> </sub></p>
+<h3 id="implementation">Implementation</h3>
+<ol class="list">
+<li>Enable <strong>add to cart popup</strong> feature on your BAB site</li>
+<li><p>Include the below javascript in your site theme,</p>
+<pre class="hljs"><code><span class="hljs-comment">/*
+*  shopping cart as flyout
+*  ======================
+*  - when the popup is open
+*    - `popup-dialog-open` class will be added on the shopping cart popup `.shopping-cart-popup`
+*    - `active` class will be added on `.shopping-cart` in header `#hd`
+*/</span>
+
+$(<span class="hljs-built_in">document</span>).bind(<span class="hljs-string">"shopping-cart-popup"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e, qtip_dialog)</span> </span>{
+ <span class="hljs-keyword">var</span> qtip_options = {
+   <span class="hljs-string">"events.visible"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+     $(<span class="hljs-keyword">this</span>).addClass(<span class="hljs-string">"popup-dialog-open"</span>);
+     <span class="hljs-keyword">var</span> on_visible = $(<span class="hljs-keyword">this</span>).qtip(<span class="hljs-string">"api"</span>).options.on_visible;
+     <span class="hljs-keyword">if</span> (on_visible) {
+       $.proxy(on_visible, <span class="hljs-keyword">this</span>)();
+     }
+   },
+   <span class="hljs-string">"events.hide"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+     $(<span class="hljs-keyword">this</span>).removeClass(<span class="hljs-string">"popup-dialog-open"</span>);
+     <span class="hljs-keyword">var</span> on_hide = $(<span class="hljs-keyword">this</span>).qtip(<span class="hljs-string">"api"</span>).options.on_hide;
+     <span class="hljs-keyword">if</span> (on_hide) {
+       $.proxy(on_hide, <span class="hljs-keyword">this</span>)();
+     }
+   },
+   <span class="hljs-string">"show.effect"</span>: <span class="hljs-literal">false</span>,
+   <span class="hljs-string">"hide.effect"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+     <span class="hljs-keyword">if</span> ($.support.transition) {
+       $(<span class="hljs-keyword">this</span>).delay(<span class="hljs-number">350</span>);
+     }
+   }
+ };
+ qtip_dialog.qtip(<span class="hljs-string">"api"</span>).set(qtip_options);
+ qtip_dialog.qtip(<span class="hljs-string">"api"</span>).set(<span class="hljs-string">"on_visible"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+   $(<span class="hljs-string">"#hd .shopping-cart"</span>).addClass(<span class="hljs-string">"active"</span>);
+ });
+ qtip_dialog.qtip(<span class="hljs-string">"api"</span>).set(<span class="hljs-string">"on_hide"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+   $(<span class="hljs-string">"#hd .shopping-cart"</span>).removeClass(<span class="hljs-string">"active"</span>);
+ });
+});</code></pre><blockquote>
+<p>the above javascript code does the job of,</p>
+<blockquote>
+<ul class="list">
+<li>Adding <code>popup-dialog-open</code> class to the <code>shopping-cart-popup</code></li>
+<li>Adding <code>active</code> class to <code>shopping-cart</code> in the header</li>
+<li>Removes any default animation on the <code>qtip</code> popup (animation wil be done through CSS)</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li><p>For shopping cart to open as flyout from right,</p>
+<ul class="list">
+<li>Initial position of <code>shopping-cart-poup</code> is set to negative<pre class="hljs"><code><span class="hljs-class">.shopping-cart-popup</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">390px</span><span class="hljs-important">!important</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">min-width</span>:<span class="hljs-value"> <span class="hljs-number">390px</span><span class="hljs-important">!important</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">top</span>:<span class="hljs-value"> <span class="hljs-number">55px</span><span class="hljs-important">!important</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">bottom</span>:<span class="hljs-value"> <span class="hljs-number">0</span><span class="hljs-important">!important</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">left</span>:<span class="hljs-value"> auto<span class="hljs-important">!important</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value"> fixed</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">right</span>:<span class="hljs-value"> -<span class="hljs-number">390px</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">overflow-y</span>:<span class="hljs-value"> auto</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#f2f2f2</span><span class="hljs-important">!important</span></span></span>;
+<span class="hljs-rule">}</span></span></code></pre></li>
+<li>on click of the <code>shopping-cart</code> icon on the header, <code>popup-dialog-open</code> will be added to the <code>shopping-cart-popup</code>,  <code>.shopping-cart-popup.popup-dialog-open</code> can be styled to have right 0px</li>
+<li><pre class="hljs"><code><span class="hljs-class">.shopping-cart-popup</span><span class="hljs-class">.popup-dialog-open</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">right</span>:<span class="hljs-value"> <span class="hljs-number">0</span></span></span>;
+<span class="hljs-rule">}</span></span>
+<span class="hljs-class">.popup-dialog</span><span class="hljs-class">.popup-dialog-open</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">top</span>:<span class="hljs-value"> <span class="hljs-number">55px</span><span class="hljs-important">!important</span></span></span>;
+<span class="hljs-rule">}</span></span></code></pre></li>
+</ul>
+</li>
+</ol>
+    </article>
+  </body>
+</html>
